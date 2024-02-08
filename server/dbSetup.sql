@@ -5,6 +5,5 @@ CREATE TABLE IF NOT EXISTS accounts (
 CREATE TABLE recipes (
     id INT AUTO_INCREMENT PRIMARY KEY, title VARCHAR(100) NOT NULL, instructions VARCHAR(500) NOT NULL, img VARCHAR(500) NOT NULL, category ENUM(
         'Cheese', 'Italian', 'Soup', 'Mexican', 'Specialty Coffee'
-    ), creatorId VARCHAR(255) NOT NULL
-    -- FOREIGN KEY (creatorId) REFERENCES accounts(id) ON DELETE CASCADE
+    ), creatorId VARCHAR(255) NOT NULL FOREIGN KEY (creatorId) REFERENCES accounts (id) ON DELETE CASCADE
 ) default charset utf8mb4 COMMENT '';
