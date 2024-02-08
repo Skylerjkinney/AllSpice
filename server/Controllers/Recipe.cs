@@ -15,18 +15,19 @@ public class RecipesController : ControllerBase
         this.auth = auth;
         this.recipesService = recipesService;
     }
-}
 
-[HttpGet]
-public ActionResult<List<Recipe>> GetAllRecipes()
-{
-    try
+    [HttpGet]
+    public ActionResult<List<Recipe>> GetAllRecipes()
     {
-        List<Recipe> recipes = recipesService.GetAllRecipes();
-        return Ok(recipes);
+        try
+        {
+            List<Recipe> recipes = recipesService.GetAllRecipes();
+            return Ok(recipes);
+        }
+        catch (Exception error)
+        {
+            return BadRequest(error.Message);
+        }
     }
-    catch (Exception error)
-    {
-        return BadRequest(error.Message);
-    }
+
 }
