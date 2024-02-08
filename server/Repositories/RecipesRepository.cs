@@ -29,4 +29,29 @@ public class RecipesRepository(IDbConnection db) : IRepository<Recipe>
         }).ToList();
         return recipes;
     }
+
+    public Recipe Create(Recipe createData)
+    {
+        string sql = @"
+        INSERT INTO recipes
+        (title, instructions, img, category, creatorId)
+        VALUES
+        (@title, @instructions, @img, @category, @creatorId);
+
+        SELECT
+            recipes.*,
+            accounts.*
+            FROM recipes
+            JOIN accounts ON recipes.creatorId = accounts.id
+            WHERE recipes.id = LAST_INSERT_ID();
+        ";
+
+        Recipe recipe = db.Query<Recipe, Account, Recipe>(sql, (recipe, account) =>
+        {
+            recipe.Creator = account;
+            return recipe;
+        },
+            createData).FirstOrDefault();
+        return recipe;
+    }
 }

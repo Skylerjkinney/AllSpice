@@ -29,5 +29,20 @@ public class RecipesController : ControllerBase
             return BadRequest(error.Message);
         }
     }
-
+    [HttpPost]
+    [Authorize]
+    public async Task<ActionResult<Recipe>> CreateRecipe([FromBody] Recipe recipeData)
+    {
+        try
+        {
+            Account userInfo = await auth.GetUserInfoAsync<Account>(HttpContext);
+            recipeData.CreatorId = userInfo.Id;
+            Recipe recipe = recipesService.CreateRecipe(recipeData);
+            return Ok(recipe);
+        }
+        catch (Exception error)
+        {
+            return BadRequest(error.Message);
+        }
+    }
 }
