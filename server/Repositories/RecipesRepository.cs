@@ -6,11 +6,6 @@ public class RecipesRepository(IDbConnection db) : IRepository<Recipe>
 {
     private readonly IDbConnection db = db;
 
-    private Recipe populateCreator(Recipe recipe, Account account)
-    {
-        recipe.Creator = account;
-        return recipe;
-    }
 
     public List<Recipe> GetAll()
     {
@@ -59,11 +54,46 @@ public class RecipesRepository(IDbConnection db) : IRepository<Recipe>
     {
         string sql = @"
         SELECT
+        recipes.*,
+        accounts.*
+        FROM recipes
+        JOIN accounts ON recipes.creatorId = accounts.id
+        WHERE recipes.id = @recipeId;
+        ";
+        Recipe recipe = db.Query<Recipe, Account, Recipe>(sql, (recipe, account) =>
+        {
+            recipe.Creator = account;
+            return recipe;
+        }, new { recipeId }).FirstOrDefault();
+        return recipe;
+    }
+
+    public void Delete(int recipeId)
+    {
+        string sql = @"
+        DELETE FROM recipes
+        WHERE recipes.id = @recipeId;
+        ";
+
+        db.Execute(sql, new { recipeId });
+    }
+
+    internal Recipe UpdateRecipe(Recipe updateData)
+    {
+        string sql = @"
+        UPDATE recipes SET
+        title = @title,
+        instructions = @instructions,
+        img = @img,
+        category = @category
+        WHERE id = @id;
+
+        SELECT
         *
         FROM recipes
-        WHERE id = @recipeId;
+        WHERE id = @id;
         ";
-        Recipe recipe = db.Query<Recipe>(sql, new { recipeId }).FirstOrDefault();
+        Recipe recipe = db.Query<Recipe>(sql, updateData).FirstOrDefault();
         return recipe;
     }
 }

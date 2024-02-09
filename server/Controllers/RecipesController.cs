@@ -1,3 +1,6 @@
+using System.Reflection.Metadata.Ecma335;
+using Microsoft.AspNetCore.Authentication.OpenIdConnect;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace AllSpice.Controllers;
@@ -52,6 +55,40 @@ public class RecipesController : ControllerBase
         {
             Recipe recipe = recipesService.GetRecipeById(recipeId);
             return Ok(recipe);
+        }
+        catch (Exception error)
+        {
+            return BadRequest(error.Message);
+        }
+    }
+    [HttpDelete("{recipeId}")]
+    [Authorize]
+
+    public async Task<ActionResult<string>> DeleteRecipe(int recipeId)
+    {
+        try
+        {
+            Account userInfo = await auth.GetUserInfoAsync<Account>(HttpContext);
+            string message = recipesService.DeleteRecipe(recipeId, userInfo.Id);
+            return Ok(message);
+        }
+        catch (Exception error)
+        {
+            return BadRequest(error.Message);
+        }
+    }
+
+    [HttpPut("{recipeId}")]
+    [Authorize]
+    public async Task<ActionResult<Recipe>> UpdateRecipe([FromBody] Recipe updateData, int recipeId)
+    {
+        try
+        {
+            updateData.Id = recipeId;
+            Account userInfo = await auth.GetUserInfoAsync<Account>(HttpContext);
+            updateData.CreatorId = userInfo.Id;
+            Recipe update = recipesService.UpdateRecipe(updateData, userInfo.Id);
+            return Ok(update);
         }
         catch (Exception error)
         {
