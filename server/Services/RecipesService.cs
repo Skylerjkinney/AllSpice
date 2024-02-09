@@ -15,4 +15,11 @@ public class RecipesService(RecipesRepository repo)
         Recipe recipe = repo.Create(recipeData);
         return recipe;
     }
+
+    internal Recipe GetRecipeById(int recipeId)
+    {
+        Recipe recipe = repo.GetById(recipeId);
+        if (recipe == null) throw new Exception($"no recipe at id: {recipeId}");
+        return recipe;
+    }
 }
