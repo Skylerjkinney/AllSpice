@@ -18,7 +18,7 @@ public class RecipesService(RecipesRepository repo)
 
     internal Recipe GetRecipeById(int recipeId)
     {
-        Recipe recipe = repo.GetById(recipeId);
+        Recipe recipe = repo.GetRecipeById(recipeId);
         if (recipe == null) throw new Exception($"no recipe at id: {recipeId}");
         return recipe;
     }

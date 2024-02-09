@@ -54,4 +54,16 @@ public class RecipesRepository(IDbConnection db) : IRepository<Recipe>
             createData).FirstOrDefault();
         return recipe;
     }
+
+    internal Recipe GetRecipeById(int recipeId)
+    {
+        string sql = @"
+        SELECT
+        *
+        FROM recipes
+        WHERE id = @recipeId;
+        ";
+        Recipe recipe = db.Query<Recipe>(sql, new { recipeId }).FirstOrDefault();
+        return recipe;
+    }
 }
