@@ -8,7 +8,14 @@ CREATE TABLE recipes (
     ), creatorId VARCHAR(255) NOT NULL, FOREIGN KEY (creatorId) REFERENCES accounts (id) ON DELETE CASCADE
 ) default charset utf8mb4 COMMENT '';
 
-INSERT INTO recipes
-(title, instructions, img, category, creatorId)
-VALUES
-("Jeremy Juice", "You do not want to know....", "https://plus.unsplash.com/premium_photo-1675949335329-d42910909742?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHx0b3BpYy1mZWVkfDR8eGpQUjRobGtCR0F8fGVufDB8fHx8fA%3D%3D", "Specialty Coffee","634844a08c9d1ba02348913d")
+CREATE TABLE ingredients (
+    id INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(100) NOT NULL, quantity VARCHAR(100), recipeId INT NOT NULL, FOREIGN KEY (recipeId) REFERENCES recipes (id) ON DELETE CASCADE
+) default charset utf8mb4 COMMENT '';
+
+INSERT INTO
+    recipes (
+        title, instructions, img, category, creatorId
+    )
+VALUES (
+        "Jeremy Juice", "You do not want to know....", "https://plus.unsplash.com/premium_photo-1675949335329-d42910909742?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHx0b3BpYy1mZWVkfDR8eGpQUjRobGtCR0F8fGVufDB8fHx8fA%3D%3D", "Specialty Coffee", "634844a08c9d1ba02348913d"
+    )
