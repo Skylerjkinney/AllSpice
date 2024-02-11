@@ -9,7 +9,7 @@ CREATE TABLE recipes (
 ) default charset utf8mb4 COMMENT '';
 
 CREATE TABLE ingredients (
-    id INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(100) NOT NULL, quantity VARCHAR(100), recipeId INT NOT NULL, FOREIGN KEY (recipeId) REFERENCES recipes (id) ON DELETE CASCADE
+    id INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(100) NOT NULL, quantity VARCHAR(100), recipeId INT NOT NULL, creatorId VARCHAR(255) NOT NULL, FOREIGN KEY (recipeId) REFERENCES recipes (id) ON DELETE CASCADE
 ) default charset utf8mb4 COMMENT '';
 
 INSERT INTO

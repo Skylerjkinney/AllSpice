@@ -11,9 +11,9 @@ public class IngredientsRepository(IDbConnection db) : IRepository<Ingredient>
     {
         string sql = @"
             INSERT INTO ingredients
-            (name, quantity, recipeId)
+            (name, quantity, recipeId, creatorId)
             VALUES
-            (@name, @quantity, @recipeId);
+            (@name, @quantity, @recipeId, @creatorId);
 
             SELECT
             ingredients.*

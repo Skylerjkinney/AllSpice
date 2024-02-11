@@ -1,7 +1,4 @@
-using System.Reflection.Metadata.Ecma335;
-using Microsoft.AspNetCore.Authentication.OpenIdConnect;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.HttpResults;
+
 
 namespace AllSpice.Controllers;
 
@@ -9,15 +6,16 @@ namespace AllSpice.Controllers;
 [Route("api/recipes")]
 public class RecipesController : ControllerBase
 {
-
-    private readonly Auth0Provider auth;
-    private readonly RecipesService recipesService;
     private readonly IngredientsService ingredientsService;
+    private readonly RecipesService recipesService;
+    private readonly Auth0Provider auth;
 
-    public RecipesController(Auth0Provider auth, RecipesService recipesService)
+
+    public RecipesController(Auth0Provider auth, RecipesService recipesService, IngredientsService ingredientsService)
     {
         this.auth = auth;
         this.recipesService = recipesService;
+        this.ingredientsService = ingredientsService;
     }
 
     [HttpGet]
