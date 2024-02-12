@@ -6,8 +6,10 @@ CREATE TABLE IF NOT EXISTS accounts (
 ) default charset utf8mb4 COMMENT '';
 
 CREATE TABLE favorites (
-    id INT AUTO_INCREMENT PRIMARY KEY, accountId VARCHAR(255) NOT NULL, recipeId int NOT NULL, Foreign Key (accountId) REFERENCES accounts (id) ON DELETE CASCADE, Foreign Key (recipeId) REFERENCES recipes (id) ON DELETE CASCADE
-) default charset utf8 COMMENT '';
+    id INT AUTO_INCREMENT PRIMARY KEY, accountId VARCHAR(255) NOT NULL, recipeId INT NOT NULL, Foreign Key (accountId) REFERENCES accounts (id) ON DELETE CASCADE, Foreign Key (recipeId) REFERENCES recipes (id) ON DELETE CASCADE
+) default charset utf8mb4 COMMENT '';
+
+DROP TABLE favorites;
 
 INSERT INTO
     recipes (
