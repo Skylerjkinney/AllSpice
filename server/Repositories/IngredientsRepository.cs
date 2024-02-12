@@ -52,22 +52,15 @@ public class IngredientsRepository(IDbConnection db) : IRepository<Ingredient>
         db.Execute(sql, new { ingredientId });
     }
 
-    public Ingredient GetIngredient(int ingredientId)
+    internal Ingredient GetById(int ingredientId)
     {
         string sql = @"
         SELECT
-        ingredients.*,
-        recipes.*
+        *
         FROM ingredients
-        JOIN recipes ON ingredients.recipes = accounts.id
-        WHERE ingredients.id = @ingredientId;
+        WHERE id = @ingredientId
         ";
-        Ingredient ingredient = db.Query<Ingredient, Account, Ingredient>(sql, (ingredient, account) =>
-        {
-            ingredient.Creator = account;
-            return ingredient;
-        }, new { ingredientId }).FirstOrDefault();
+        Ingredient ingredient = db.Query<Ingredient>(sql, new { ingredientId }).FirstOrDefault();
         return ingredient;
     }
 }
-// FIXME above function

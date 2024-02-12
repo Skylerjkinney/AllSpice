@@ -1,9 +1,7 @@
 namespace AllSpice.Models;
 
-public class Recipe
+public class Recipe : RepoItem<int>
 {
-    public int Id { get; set; }
-
     public string Title { get; set; }
 
     public string Instructions { get; set; }
@@ -16,4 +14,8 @@ public class Recipe
 
     public Account Creator { get; set; }
 
+}
+public class FavoriteRecipe : Recipe
+{
+    public int FavoriteId { get; set; }
 }
