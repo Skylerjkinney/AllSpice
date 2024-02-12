@@ -42,4 +42,32 @@ public class IngredientsRepository(IDbConnection db) : IRepository<Ingredient>
         }, new { recipeId }).ToList();
         return ingredients;
     }
+
+    public void Delete(int ingredientId)
+    {
+        string sql = @$"
+        DELETE FROM ingredients
+        WHERE ingredients.id = @ingredientId;
+        ";
+        db.Execute(sql, new { ingredientId });
+    }
+
+    public Ingredient GetIngredient(int ingredientId)
+    {
+        string sql = @"
+        SELECT
+        ingredients.*,
+        recipes.*
+        FROM ingredients
+        JOIN recipes ON ingredients.recipes = accounts.id
+        WHERE ingredients.id = @ingredientId;
+        ";
+        Ingredient ingredient = db.Query<Ingredient, Account, Ingredient>(sql, (ingredient, account) =>
+        {
+            ingredient.Creator = account;
+            return ingredient;
+        }, new { ingredientId }).FirstOrDefault();
+        return ingredient;
+    }
 }
+// FIXME above function
