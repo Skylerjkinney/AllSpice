@@ -34,16 +34,13 @@ public class FavoritesRepository(IDbConnection db)
         SELECT
         recipes.*,
         favorites.*,
-        accounts.*
         FROM favorites
-        JOIN recipes ON favorites.recipeId = recipes.id
-        JOIN accounts ON recipes.creatorId = accounts.id
+        JOIN recipes ON recipes.id = favorites.recipeId
         WHERE favorites.accountId = @userId
         ";
-        List<FavoriteRecipe> favorite = db.Query<FavoriteRecipe, Favorite, Account, FavoriteRecipe>(sql, (favoriteRecipe, favorite, account) =>
+        List<FavoriteRecipe> favorite = db.Query<FavoriteRecipe, Favorite, FavoriteRecipe>(sql, (favoriteRecipe, favorite) =>
         {
             favoriteRecipe.FavoriteId = favorite.Id;
-            favoriteRecipe.Creator = account;
             return favoriteRecipe;
         }, new { userId }).ToList();
         return favorite;
