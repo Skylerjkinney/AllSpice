@@ -1,6 +1,6 @@
 export class Recipe {
     constructor(data) {
-        this.image = data.image
+        this.img = data.img
         this.title = data.title
         this.instructions = data.instructions
         this.category = data.category

@@ -12,16 +12,21 @@ const routes = [
     component: loadPage('HomePage')
   },
   {
-    path: '/about',
-    name: 'About',
-    component: loadPage('AboutPage')
+    path: '/recipes',
+    name: 'Recipes',
+    component: loadPage('RecipesPage')
   },
   {
     path: '/account',
     name: 'Account',
     component: loadPage('AccountPage'),
     beforeEnter: authGuard
-  }
+  },
+  {
+    path: '/recipeDetails/:recipeId',
+    name: 'Recipe Details',
+    component: loadPage('RecipeDetailsPage')
+  },
 ]
 
 export const router = createRouter({
