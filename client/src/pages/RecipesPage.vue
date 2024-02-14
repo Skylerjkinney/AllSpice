@@ -29,6 +29,8 @@ import Pop from '../utils/Pop';
 import { AppState } from '../AppState';
 import { recipesService } from '../services/RecipesService.js';
 import Carasoul from '../components/Carasoul.vue';
+import ModalWrapper from '../components/ModalWrapper.vue';
+import RecipeForm from '../components/RecipeForm.vue';
 
 export default {
   setup() {

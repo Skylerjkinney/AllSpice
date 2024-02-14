@@ -1,10 +1,10 @@
 <template>
     <div class="modal fade" :id="modalId" tabindex="-1" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
-    </div>
-    <div :class="`modal-dialog modal-sm modal-${modalSize}`" role="document">
-        <div class="modal-content">
-            <div class="modal-body">
+        <div :class="`modal-dialog modal-sm modal-${modalSize}`" role="document">
+            <div class="modal-content">
+                <slot>
 
+                </slot>
             </div>
         </div>
     </div>
@@ -13,7 +13,7 @@
 
 <script>
 export default {
-    props: { modalId: { type: String, required: true }, modalSize: { type: String, deafualt: 'xl' } },
+    props: { modalId: { type: String, required: true }, modalSize: { type: String, default: 'xl' } },
     setup() {
         return {}
     }

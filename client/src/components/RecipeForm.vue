@@ -1,20 +1,20 @@
 <template>
     <form @submit.prevent="createRecipe()" class="row my-3">
-        <div class="col-md-4">
+        <div class="col-6">
             <label for="insert-image">Recipe Preview </label>
-            <img v-if="cultData.img" class="img-fluid" :src="recipeData.img" alt="Preview">
+            <img v-if="recipeData.img" class="img-fluid" :src="recipeData.img" alt="Preview">
         </div>
-        <div class="col-md-4">
+        <div class="col-6">
             <label for="insert-image">Recipe Image</label>
             <input v-model="recipeData.img" class="form-control" type="url" required maxlength="500" name="insert-image"
                 id="insert-image">
         </div>
-        <div class="col-md-4">
+        <div class="col-6">
             <label for="create-recipe-title">Recipe Title</label>
             <input v-model="recipeData.name" class="form-control" type="text" minlength="3" maxlength="25" required
                 name="create-recipe-title" id="create-recipe-name">
         </div>
-        <div class="col-md-4">
+        <div class="col-6">
             <label for="create-recipe-description">Recipe Description</label>
             <input v-model="recipeData.name" class="form-control" type="text" minlength="25" required maxlength="500"
                 name="create-recipe-name" id="create-recipe-name">

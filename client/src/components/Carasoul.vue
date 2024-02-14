@@ -1,12 +1,19 @@
 <template>
     <div id="carouselExampleFade" class="carousel slide carousel-fade">
         <div class="carousel-inner">
-            <div class="carousel-item active bg-dark">
+            <!-- <div class="carousel-item active cover-img rounded">
                 <img src="https://images.unsplash.com/photo-1466637574441-749b8f19452f?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8aG9tZSUyMGNoZWZ8ZW58MHx8MHx8fDA%3D"
-                    class="d-grid w-100" alt="Progress to find ur meal bud">
-            </div>
-            <div v-for="recipe in recipes" class="carousel-item img-fluid bg-dark">
-                <img :src="recipe.img" class="d-grid w-100" :alt="recipe.title">
+                    class="d-grid w-100 rounded border" alt="Progress to find ur meal bud">
+            </div> -->
+            <div class="carousel-item" :class="i == 0 ? 'active' : ''" v-for="(recipe, i) in recipes">
+                <div>
+                    <!-- //NOTE look into changing transition time on text -->
+                    <h1 class="text-center fade">{{ recipe.title }}</h1>
+                    <div class="cover-img rounded" data-bs-toggle="modal" data-bs-target="#recipe-details-modal"
+                        :style="{ background: `url(${recipe.img})` }">
+                        <img :src="recipe.img" class="d-grid w-100 rounded border" :alt="recipe.title">
+                    </div>
+                </div>
             </div>
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
@@ -35,10 +42,27 @@ export default {
 
 
 <style lang="scss" scoped>
-img {
-    height: 60vh;
-    width: 100%;
-    object-fit: contain;
-    object-position: center;
+.cover-img {
+    background-position: center;
+    background-size: cover;
+
+    img {
+        width: 100%;
+        height: 80vh;
+        object-fit: contain;
+        object-position: center;
+        backdrop-filter: blur(20px);
+    }
+}
+
+.fade {
+    opacity: 0;
+    transition: all .25s linear;
+}
+
+.active {
+    .fade {
+        opacity: 1;
+    }
 }
 </style>
