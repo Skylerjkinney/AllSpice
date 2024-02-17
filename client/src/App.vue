@@ -1,7 +1,7 @@
 <template>
   <main>
     <ModalWrapper modalId="recipe-details-modal">
-      <RecipeDetails :recipe="recipe" />
+      <RecipeDetails />
     </ModalWrapper>
 
     <router-view />

@@ -7,5 +7,9 @@ export const AppState = reactive({
   /** @type {import('./models/Account.js').Account} */
   account: {},
   /** @type {Recipe[]} */
-  recipes: []
+  recipes: [],
+  /** @type {Recipe} */
+  activeRecipe: null,
+  /** @type {RecipeIngredient[]} */
+  activeIngredients: [],
 })

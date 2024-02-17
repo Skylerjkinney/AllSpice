@@ -10,5 +10,11 @@ class RecipesService {
         let newRecipes = response.data.map(recipe => new Recipe(recipe))
         AppState.recipes = newRecipes
     }
+    setActiveRecipe(recipeId) {
+        console.log(recipeId)
+        const selectedRecipe = AppState.recipes.find(recipe => recipe.id == recipeId)
+        console.log(selectedRecipe)
+        AppState.activeRecipe = selectedRecipe
+    }
 }
 export const recipesService = new RecipesService()

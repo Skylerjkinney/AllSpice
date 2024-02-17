@@ -9,8 +9,8 @@
                 <div>
                     <!-- //NOTE look into changing transition time on text -->
                     <h1 class="text-center fade">{{ recipe.title }}</h1>
-                    <div class="cover-img rounded" data-bs-toggle="modal" data-bs-target="#recipe-details-modal"
-                        :style="{ background: `url(${recipe.img})` }">
+                    <div @click="setActiveRecipe(recipe.id)" class="cover-img rounded" data-bs-toggle="modal"
+                        data-bs-target="#recipe-details-modal" :style="{ background: `url(${recipe.img})` }">
                         <img :src="recipe.img" class="d-grid w-100 rounded border" :alt="recipe.title">
                     </div>
                 </div>
@@ -31,11 +31,16 @@
 <script>
 import { AppState } from '../AppState';
 import { computed, ref, onMounted } from 'vue';
-import { Recipe } from '../models/Recipe.js';
+import { recipesService } from '../services/RecipesService';
 export default {
     props: { recipes: { type: Array, required: true } },
     setup(props) {
-        return {}
+        return {
+            setActiveRecipe(recipeId) {
+                console.log('papa?')
+                recipesService.setActiveRecipe(recipeId)
+            }
+        }
     }
 };
 </script>

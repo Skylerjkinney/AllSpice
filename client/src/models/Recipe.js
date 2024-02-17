@@ -9,3 +9,11 @@ export class Recipe {
         this.id = data.id
     }
 }
+
+export class RecipeIngredient extends Recipe {
+    constructor(data) {
+        super(data)
+        this.name = data.name
+        this.quantity = data.quantity
+    }
+}
