@@ -6,7 +6,6 @@
         <h5>{{ activeRecipe.creator.name }}</h5>
     </div>
     <div v-if="activeIngredients.length">
-        WHAT THE FUCK IS UOP
     </div>
 </template>
 
